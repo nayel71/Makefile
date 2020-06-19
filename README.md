@@ -12,6 +12,8 @@ CFLAGS
 EXEC
 ```
 
+To enable [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer), use the option `enable_asan=1` with `make`.
+
 ## Example
 
 For a project that uses [GTK](https://www.gtk.org/), I could use
@@ -38,5 +40,3 @@ Makefile
 README.md
 ...
 ```
-
-To enable `AddressSanitizer`, use the option `detect_leaks=1` with `make`.
