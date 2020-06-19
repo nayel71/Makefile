@@ -38,3 +38,5 @@ Makefile
 README.md
 ...
 ```
+
+To enable `AddressSanitizer`, use the option `detect_leaks=1` with `make`.
