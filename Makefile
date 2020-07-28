@@ -1,17 +1,20 @@
 # compiler variables
-CC	= gcc
+CC	= clang
 LDLIBS	=
-CFLAGS	= -Wall -MMD -MP
+CFLAGS	= -Wall -MMD -MP -Werror=vla
 
 ifeq ($(enable_asan),1)
-ASFLAGS	= -fsanitize=address
-CFLAGS += $(ASFLAGS) -g
+ASFLAGS	= -fsanitize=address -fno-omit-frame-pointer
+CFLAGS += $(ASFLAGS) -g -O3
 endif
 
 # directory variables
 SRCDIR	= src
 OBJDIR	= obj
 DEPDIR	= dep
+INCDIR	= include
+
+CFLAGS += -I$(INCDIR)
 
 # file variables
 SRCS  	= $(wildcard $(SRCDIR)/*.c)
@@ -27,7 +30,7 @@ EXEC	=
 all: mkdirs $(OBJS) $(EXEC)
 
 mkdirs:
- 	mkdir -p $(OBJDIR) $(DEPDIR)
+	mkdir -p $(OBJDIR) $(DEPDIR)
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(COMPILE.c) $(OUTPUT_OPTION) $<
@@ -40,4 +43,4 @@ $(EXEC): $(OBJS)
 
 # clean-up
 clean:
-	rm -rf $(OBJDIR) $(DEPDIR) $(EXEC)
+	rm -rf $(OBJDIR) $(DEPDIR) $(EXEC) $(EXEC).dSYM/
