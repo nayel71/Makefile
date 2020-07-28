@@ -1,5 +1,5 @@
 # compiler variables
-CC	= clang
+CC	= gcc
 LDLIBS	=
 CFLAGS	= -Wall -MMD -MP -Werror=vla
 
